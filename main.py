@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QHBoxLayout, QLabel, QButtonGroup
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QHBoxLayout, QLabel, QButtonGroup, QMessageBox, QLineEdit
 from pathlib import Path
 import json
 
@@ -13,14 +13,25 @@ if MAIN_FOLDER_PATH.exists() == False:
         settings = {"current_year" : "None", "last_trimester" : "None"}
         json.dump(settings, f)
 
+def load_settings():
+    if SETTINGS_FILE_PATH.exists():
+        with open(SETTINGS_FILE_PATH, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    else:
+        return {"current_year": "None", "last_trimester": "None"}
+
+def update_settings(new_year):
+    settings = {"current_year": new_year, "last_trimester": "None"}
+    with open(SETTINGS_FILE_PATH, 'w', encoding='utf-8') as f:
+        json.dump(settings, f)
 
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Gestion de notes")
 
+        self.settings = load_settings()
         
-        # The main layout for the main_widget
         main_layout = QVBoxLayout()
 
         # Setup for tools_widget and its layout
@@ -78,6 +89,8 @@ class MainWindow(QWidget):
         display_widget.setMinimumHeight(500)
         display_widget.setLayout(display_layout)
 
+        if self.settings["current_year"] == "None":
+            self.init_first_time_display(main_layout)
 
 
         # Adding tools_widget and classes_widget to the main layout
@@ -88,6 +101,94 @@ class MainWindow(QWidget):
 
         # Set the main layout to the main window
         self.setLayout(main_layout)
+
+
+    def init_first_time_display(self, layout):
+        self.first_time_display = QWidget()
+        first_time_layout = QHBoxLayout(self.first_time_display)
+        
+        label = QLabel("Bienvenue! Veuillez entrer l'année courante:")
+        self.year_input = QLineEdit()  # Input for year
+        add_year_btn = QPushButton("Ajouter l'année")
+
+        # Connect the button's click signal to the slot that handles year addition
+        add_year_btn.clicked.connect(self.add_year)
+
+        first_time_layout.addWidget(label)
+        first_time_layout.addWidget(self.year_input)
+        first_time_layout.addWidget(add_year_btn)
+
+        layout.addWidget(self.first_time_display)
+
+    def add_year(self):
+        new_year = self.year_input.text().strip()
+        if new_year:
+            update_settings(new_year)
+            self.settings["current_year"] = new_year  # Update settings in memory
+            self.first_time_display.setVisible(False)  # Hide the widget
+            QMessageBox.information(self, "Mise à jour", "L'année a été ajoutée avec succès.")
+        else:
+            QMessageBox.warning(self, "Erreur", "Veuillez entrer une année valide.")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if __name__ == "__main__":
