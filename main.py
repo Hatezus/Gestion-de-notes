@@ -4,7 +4,7 @@ from Widgets.Tools.tools import ToolsWidget
 from Widgets.Classes.classes import ClassesWidget
 from Widgets.Trimesters.trimesters import TrimestersWidget
 from Widgets.Display.display import DisplayWidget
-from Widgets.No_Active_Year.no_active_year import NoActiveYearWidget
+
 
 import importlib
 importlib.reload(settings_module)
@@ -18,16 +18,14 @@ class MainWindow(QWidget):
         super().__init__()
 
         self.setWindowTitle("Gestion de notes")
-
-        self.settings = settings_module.load_settings()
         
         main_layout = QVBoxLayout()
 
         self.tools_widget = ToolsWidget()
         self.classes_widget = ClassesWidget()
         self.trimesters_widget = TrimestersWidget()
-        self.display_widget = DisplayWidget()     
-
+        self.display_widget = DisplayWidget()   
+        
 
         main_layout.addWidget(self.tools_widget)
         main_layout.addWidget(self.classes_widget)

@@ -21,7 +21,7 @@ def load_settings():
     else:
         return {"current_year": "None", "trimester": "None"}
 
-def update_settings(new_year):
+def update_year(new_year):
     settings = {"current_year": new_year, "trimester": "None"}
     with open(SETTINGS_FILE_PATH, 'w', encoding='utf-8') as f:
         json.dump(settings, f)
