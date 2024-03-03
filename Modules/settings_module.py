@@ -14,16 +14,13 @@ def first_start():
             json.dump(settings, f)
 
 
-def load_settings():
-    if SETTINGS_FILE_PATH.exists():
-        with open(SETTINGS_FILE_PATH, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    else:
-        return 
+def load_settings() -> dict:
+    with open(SETTINGS_FILE_PATH, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
 
 def update_settings(key, new_value):
-    if SETTINGS_FILE_PATH.exists():
-        with open(SETTINGS_FILE_PATH, 'r', encoding='utf-8') as f:
-            settings = {key: new_value}
-        with open(SETTINGS_FILE_PATH, 'w', encoding='utf-8') as f:
-            json.dump(settings, f)
+    with open(SETTINGS_FILE_PATH, 'r', encoding='utf-8') as f:
+        settings = {key: new_value}
+    with open(SETTINGS_FILE_PATH, 'w', encoding='utf-8') as f:
+        json.dump(settings, f)
