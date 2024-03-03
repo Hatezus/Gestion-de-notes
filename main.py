@@ -12,7 +12,6 @@ importlib.reload(settings_module)
 
 settings_module.first_start()
 
-
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
