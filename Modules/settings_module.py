@@ -19,9 +19,11 @@ def load_settings():
         with open(SETTINGS_FILE_PATH, 'r', encoding='utf-8') as f:
             return json.load(f)
     else:
-        return {"current_year": "None", "trimester": "None"}
+        return 
 
-def update_year(new_year):
-    settings = {"current_year": new_year, "trimester": "None"}
-    with open(SETTINGS_FILE_PATH, 'w', encoding='utf-8') as f:
-        json.dump(settings, f)
+def update_settings(key, new_value):
+    if SETTINGS_FILE_PATH.exists():
+        with open(SETTINGS_FILE_PATH, 'r', encoding='utf-8') as f:
+            settings = {key: new_value}
+        with open(SETTINGS_FILE_PATH, 'w', encoding='utf-8') as f:
+            json.dump(settings, f)

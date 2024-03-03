@@ -6,3 +6,5 @@ class YearLineEdit(QLineEdit):
     def __init__(self):
         super().__init__()
         self.setValidator(QRegularExpressionValidator(QRegularExpression(r'^\d{4}$')))
+
+        self.setFixedSize(100, 30)

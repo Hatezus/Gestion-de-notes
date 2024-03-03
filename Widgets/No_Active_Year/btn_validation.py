@@ -16,6 +16,8 @@ class ValidationBtn(QPushButton):
         self.line_edit2 = line_edit2
         self.clicked.connect(self.on_click)
 
+        self.setFixedSize(230, 35)
+
     def on_click(self):
         year1 = self.line_edit1.text()
         year2 = self.line_edit2.text()
@@ -25,7 +27,7 @@ class ValidationBtn(QPushButton):
                 year_folder = MAIN_FOLDER_PATH / folder_name
                 year_folder.mkdir()
                 QMessageBox.information(self, "Success", "L'année a été créer avec succès !")
-                settings_module.update_year(year_folder.name)
+                settings_module.update_settings("current_year", year_folder.name)
                 self.operation_successful.emit()
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Le dossier n'as pas pus être créer: {e}")
