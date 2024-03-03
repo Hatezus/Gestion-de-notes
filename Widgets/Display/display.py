@@ -13,7 +13,7 @@ class DisplayWidget(QWidget):
          
         self.settings = load_settings()
 
-        if self.settings["current_year"] == "None":
+        if self.settings["current_year_path"] == "None":
 
             self.no_active_year_widget = NoActiveYearWidget()
 
