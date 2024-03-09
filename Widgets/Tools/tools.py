@@ -31,3 +31,8 @@ class ToolsWidget(QWidget):
         main_layout.addWidget(self.btn_settings)
 
         self.setLayout(main_layout)
+
+    @property
+    def class_added_signal(self):
+        # This property returns the classAdded signal from the btn_add_class instance
+        return self.btn_add_class.classAdded

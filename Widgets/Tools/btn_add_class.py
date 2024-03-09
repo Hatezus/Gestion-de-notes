@@ -1,4 +1,5 @@
 from PySide6.QtWidgets import QPushButton, QMessageBox
+from PySide6.QtCore import Signal
 from pathlib import Path
 
 import Modules.check_module as check_module
@@ -7,6 +8,9 @@ import Widgets.Pop_Up.pop_up_add_class as pop_up_add_class
 
 
 class AddClassBtn(QPushButton):
+
+    classAdded = Signal()
+
     def __init__(self, text):
         super().__init__(text)
 
@@ -42,6 +46,8 @@ class AddClassBtn(QPushButton):
                     path_to_folder_t2.mkdir()
                     path_to_folder_t3 = path_to_folder / "3ème Trimestre"
                     path_to_folder_t3.mkdir()
+
+                    self.classAdded.emit()
 
         
         else:

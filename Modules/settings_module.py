@@ -12,9 +12,13 @@ def first_start():
         with open(SETTINGS_FILE_PATH, 'w', encoding='utf-8') as f:
             settings = {
                 "current_year_path" : "None", 
+                "current_class_path" : "None",
+                "current_student_path" : "None",
                 "trimester" : 0, 
                 "main_folder_path": MAIN_FOLDER_PATH.as_posix(), 
-                "settings_path": SETTINGS_FILE_PATH.as_posix()}
+                "settings_path": SETTINGS_FILE_PATH.as_posix(), 
+                "classes" : []
+                }
             json.dump(settings, f, ensure_ascii=False, indent=4)
 
 

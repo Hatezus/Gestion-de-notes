@@ -31,6 +31,7 @@ class MainWindow(QWidget):
         main_layout.addWidget(self.trimesters_widget)
         main_layout.addWidget(self.display_widget)
 
+        self.tools_widget.class_added_signal.connect(self.classes_widget.refresh)
 
         self.setLayout(main_layout)
         self.showMaximized()
