@@ -17,7 +17,7 @@ class AddClassDialog(QDialog):
         wrapper_btn_layout = QHBoxLayout()
         wrapper_btn_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        wrapper_lbl_layout= QVBoxLayout()
+        wrapper_lbl_tips_layout= QVBoxLayout()
 
         self.qle = QLineEdit(self)
         self.qle.setPlaceholderText("Entrez une classe")
@@ -31,20 +31,20 @@ class AddClassDialog(QDialog):
         self.btnCancel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.btnCancel.clicked.connect(self.reject) # Ferme la dialogue avec un résultat "reject"
 
-        self.lbl = QLabel("""Vous ne pouvez pas mettre de caractères spéciaux ni d'espaces
+        self.lbl_tips = QLabel("""Vous ne pouvez pas mettre de caractères spéciaux ni d'espaces
 Vous ne pourrez pas avoir deux classes avec l'exact même nom
 Si vous avez deux classes de même niveaux, vous pouvez faire par exemple CM1_1 et CM1_2
 """)
 
-        wrapper_lbl_layout.addWidget(self.lbl)
-        wrapper_lbl_layout.setContentsMargins(style.lbl_margin_left, style.lbl_margin_top, style.lbl_margin_right, style.lbl_margin_bottom)
+        wrapper_lbl_tips_layout.addWidget(self.lbl_tips)
+        wrapper_lbl_tips_layout.setContentsMargins(style.lbl_tips_margin_left, style.lbl_tips_margin_top, style.lbl_tips_margin_right, style.lbl_tips_margin_bottom)
 
         wrapper_btn_layout.addWidget(self.btnOk)
         wrapper_btn_layout.addWidget(self.btnCancel)
 
         main_layout.addWidget(self.qle)
         main_layout.addLayout(wrapper_btn_layout)
-        main_layout.addLayout(wrapper_lbl_layout)
+        main_layout.addLayout(wrapper_lbl_tips_layout)
         
         
         self.setLayout(main_layout)
